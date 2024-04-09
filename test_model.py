@@ -7,6 +7,28 @@ import tensorflow.compat.v1 as tf
 from tkinter import filedialog
 from tkinter import messagebox
 
+def submit_username():
+	global username_entry, username
+	username = username_entry.get()
+	root.destroy()
+
+# Create the main window
+root = tk.Tk()
+root.title("Username Input")
+
+# Create a label and entry widget for username input
+username_label = tk.Label(root, text="Enter Username:")
+username_label.pack()
+username_entry = tk.Entry(root)
+username_entry.pack()
+
+# Create a submit button
+submit_button = tk.Button(root, text="Submit", command=submit_username)
+submit_button.pack()
+
+# Run the Tkinter event loop
+root.mainloop()
+
 input_image_size=200
 input_image_size=200
 
@@ -35,12 +57,12 @@ messagebox.showinfo(
 root.destroy()
 
 root = tk.Tk() # it will create top level or application window
-# answer1 = filedialog.askopenfilename(
-#     parent=root,
-#     initialdir=os.getcwd(),
-#     title="Please select a genuine signature image file"
-# )
-answer1 = "./Test_network_data/forged_signatures/arpan/Signature.jpeg"
+# answer1 = "./Test_network_data/forged_signatures/arpan/Signature.jpeg"
+answer1 = filedialog.askopenfilename(
+    parent=root,
+    initialdir=os.getcwd(),
+    title="Please select a genuine signature image file"
+)
 answer2 = filedialog.askopenfilename(
     parent=root,
     initialdir=os.getcwd(),
@@ -67,11 +89,11 @@ try:
 
 	if label == True:
 		root = tk.Tk()
-		messagebox.showinfo("Result", "The signatures matched")
+		messagebox.showinfo("Result", f"The signature of {username} matched")
 		root.destroy()
 	else:
 		root = tk.Tk()
-		messagebox.showwarning("Result", "The signatures didn't match")
+		messagebox.showwarning("Result", f"The signature of {username} didn't match")
 		root.destroy()
 except:
     print("Something went wrong, please try again")
